@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/moul/gnoplace/actions/workflows/ci.yml"><img src="https://github.com/moul/gnoplace/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://mygnoscan.moul.p2p.team/realm/r/moul/gnoplace"><img src="https://mygnoscan.moul.p2p.team/_badges/shield/status/r/moul/gnoplace?network=mainnet" alt="realm status on mainnet"></a>
+  <a href="https://gnoscope.com/realm/r/moul/gnoplace"><img src="https://gnoscope.com/_badges/shield/status/r/moul/gnoplace?network=mainnet" alt="realm status on mainnet"></a>
   <a href="./CHECKLIST.md"><img src="https://img.shields.io/badge/web2.5-checklist-0083c7" alt="checklist"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-97ca00.svg" alt="License"></a>
 </p>
@@ -26,7 +26,7 @@
 ```
 p/moul/gnoplace/v0      the canvas: cells, packing, drawing. no chain import.
 r/moul/gnoplace         who may paint, how often, and what the world sees.
-r/moul/gnoplace/preview the same source at a second path, private = true. generated.
+r/moul/preview/gnoplace the same source at a second path, private = true. generated.
 web/                    a static page. no build step, no node_modules.
 ```
 
