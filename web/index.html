@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>gnoplace — one canvas, everybody paints</title>
+<meta name="description" content="A shared pixel canvas on gno.land. Every cell is a transaction; the canvas is one 512-byte value on chain.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fff'/><rect x='4' y='4' width='10' height='10' fill='%23e50000'/><rect x='18' y='4' width='10' height='10' fill='%230083c7'/><rect x='4' y='18' width='10' height='10' fill='%23e5d900'/><rect x='18' y='18' width='10' height='10' fill='%2302be01'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>gnoplace</h1>
+  <p class="tagline">One canvas. Everybody paints. Every cell is a transaction.</p>
+  <nav>
+    <label>network
+      <select id="network">
+        <option value="mainnet">mainnet · r/moul/gnoplace</option>
+        <option value="preview">preview · r/moul/gnoplace/preview</option>
+        <option value="local">local gnodev</option>
+      </select>
+    </label>
+    <button id="connect" type="button">Connect wallet</button>
+    <span id="status" class="status">reading only — no wallet needed</span>
+  </nav>
+</header>
+
+<main>
+  <section id="board-panel">
+    <canvas id="canvas" width="512" height="512" aria-label="the shared canvas"></canvas>
+    <p class="board-meta">
+      <span id="cursor" class="mono">hover a cell</span>
+      <button id="share" type="button" class="link">copy link</button>
+      <button id="reload" type="button" class="link">reload from chain</button>
+    </p>
+  </section>
+
+  <aside>
+    <h2>Palette</h2>
+    <div id="palette" class="palette"></div>
+    <p id="chosen" class="fine"></p>
+
+    <p>Click a cell to paint it. Reading the canvas needs nothing from you; painting
+    needs a signature and one transaction per cell. One address may paint every
+    <b>3 blocks</b>, which a second address bypasses completely: it is a speed bump, not
+    a defence, and the realm says so on its own page.</p>
+
+    <h2>Recent</h2>
+    <div id="feed"></div>
+
+    <details id="fallback">
+      <summary>No wallet? The command that does the same thing</summary>
+      <pre id="cmd" class="mono"></pre>
+    </details>
+
+    <footer>
+      <p><a id="link-realm" href="https://gno.land/r/moul/gnoplace">the realm in gnoweb</a> ·
+         <a href="https://github.com/moul/gnoplace">the source</a> ·
+         <a href="https://github.com/moul/gnoplace/blob/main/CHECKLIST.md">the checklist</a></p>
+      <p class="fine">Part of an exploration of what a web2.5 app on gno.land actually needs.</p>
+    </footer>
+  </aside>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
