@@ -55,7 +55,9 @@ async function refresh() {
     renderFeed(await qevalString(state.net, "Feed()"));
   } catch (err) {
     // Not deployed on this network yet is a normal state for a repository whose
-    // whole subject is the deploy story.
+    // whole subject is the deploy story. An empty panel reads as "still
+    // loading" forever, so say what happened instead.
+    $("feed").innerHTML = `<p class="fine">Nothing to read here: the realm is not deployed on this network yet, or the node did not answer.</p>`;
     say(`${state.netName}: ${err.message}`, "bad");
   }
 }
