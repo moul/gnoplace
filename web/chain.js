@@ -7,7 +7,7 @@
 
 export const NETWORKS = {
   mainnet: { rpc: "https://rpc.gno.land:443", chainId: "gnoland-1", realm: "gno.land/r/moul/gnoplace" },
-  preview: { rpc: "https://rpc.gno.land:443", chainId: "gnoland-1", realm: "gno.land/r/moul/gnoplace/preview" },
+  preview: { rpc: "https://rpc.gno.land:443", chainId: "gnoland-1", realm: "gno.land/r/moul/preview/gnoplace" },
   local:   { rpc: "http://127.0.0.1:26657",   chainId: "dev",       realm: "gno.land/r/moul/gnoplace" },
 };
 

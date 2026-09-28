@@ -22,7 +22,7 @@ that pins the hole, so it stays documented.
 a page that renders slower every day and storage nobody ever reclaims.
 
 **No page hardcodes this realm's path.** The same source is deployed here and at
-`/preview`, and every link is built from the package path the code is actually running
+`r/moul/preview/gnoplace`, and every link is built from the package path the code is actually running
 under.
 
 Pages: the canvas at the root, `:u/<address>` for a painter, `:about` for what the

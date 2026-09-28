@@ -138,8 +138,8 @@ no storage at all. It is also run-length encoded along each row, which is the
 difference between a page that carries 80 KB of markup and one that carries a
 few hundred bytes of it.
 
-There are two deployments of this same source: this one, and a {BT}/preview{BT}
-twin flagged {BT}private = true{BT} so it stays redeployable while the design
+There are two deployments of this same source: this one, and a {BT}r/moul/preview/gnoplace{BT}
+flagged {BT}private = true{BT} so it stays redeployable while the design
 is still moving. A public path can never be redeployed, which makes that flag the
 most consequential line in the whole repository.
 
