@@ -1,9 +1,12 @@
 // The page. A canvas you click, drawn from one string the realm hands out.
 import * as e from "./engine.js";
 import { NETWORKS, qevalString, wallet, gnokeyCommand } from "./chain.js";
+import * as onboarding from "./onboarding.js";
+import * as gnosession from "./session.js";
 
 const $ = (id) => document.getElementById(id);
-const state = { net: NETWORKS.mainnet, netName: "mainnet", account: null, color: 5, cells: e.decode(e.empty()) };
+const state = { net: NETWORKS.mainnet, netName: "mainnet", account: null, color: 5,
+  cells: e.decode(e.empty()), session: null, grant: null };
 
 const PX = 16;
 const ctx = $("canvas").getContext("2d");
@@ -80,7 +83,7 @@ $("canvas").addEventListener("click", async (ev) => {
   if (!state.account) { say("connect a wallet to paint, or paste the command below", "bad"); return; }
   try {
     say("signing…");
-    await wallet.call(state.net, state.account, "Paint", [x, y, state.color]);
+    await send("Paint", [x, y, state.color]);
     // Paint locally straight away so the click feels immediate, then let the
     // chain correct it. The optimistic cell is never trusted: refresh
     // overwrites the whole canvas with what the realm actually holds.
@@ -109,6 +112,34 @@ $("network").addEventListener("change", (ev) => {
   drawPalette();
   refresh();
 });
+
+
+// The session panel. When a session is granted, the app signs here; otherwise it
+// falls back to the wallet. Same caller either way: the chain sees the master.
+const sessionPanel = onboarding.mount({
+  el: $("session"),
+  net: () => state.net,
+  getAccount: () => state.account,
+  setAccount: (addr) => {
+    // Named, not connected: enough to read a grant and to be the caller in one,
+    // and it never lets this page sign anything the session cannot.
+    state.account = addr;
+    say(`playing as ${addr.slice(0, 10)}…`, "live");
+  },
+  keyName: "YOURKEY",
+  onChange: ({ session, grant }) => { state.session = session; state.grant = grant; },
+});
+
+/** send signs with the session when there is one, and with the wallet when not. */
+async function send(fn, args) {
+  if (state.grant) {
+    return gnosession.call({
+      rpcUrl: state.net.rpc, chainId: state.net.chainId,
+      session: state.session, grant: state.grant, func: fn, args,
+    });
+  }
+  return wallet.call(state.net, state.account, fn, args);
+}
 
 drawPalette();
 draw();
